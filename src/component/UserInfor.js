@@ -22,7 +22,10 @@ class UserInfor extends React.Component {
     // this.setState({
     //   name: event.target.value,
     // });
-    console.log(this.state);
+    this.props.handleNewUser({
+      name: this.state.name,
+      age: this.state.age,
+    });
   };
 
   render() {
@@ -40,7 +43,7 @@ class UserInfor extends React.Component {
               this.handleOnChangeInput(event);
             }}
           />
-          <button> Click Form !!!</button>
+
           <label>Age is {this.state.age}</label>
           <input
             type="text"

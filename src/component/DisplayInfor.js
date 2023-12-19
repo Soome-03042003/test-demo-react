@@ -1,17 +1,18 @@
 import React from "react";
 import "./DisplayInfor.scss";
+// import logo from "../logo.svg";
 class DisplayInfor extends React.Component {
   state = {
     thisShowList: true,
   };
   handleShowHidden = () => {
-    this.setState({
-      thisShowList: false,
-    });
+    this.setState((prevState) => ({
+      thisShowList: !prevState.thisShowList,
+    }));
   };
   render() {
     const { listUser } = this.props;
-    console.table(listUser);
+
     return (
       <div className="DisplayInfor-container">
         <div>
@@ -26,9 +27,9 @@ class DisplayInfor extends React.Component {
           </span>
         </div>
         {this.state.thisShowList && (
-          <div>
+          <>
             {listUser.map((user, index) => {
-              console.log(index);
+              // console.log(index);
 
               return (
                 <div className={+user.age > 18 ? "red" : "blue"} key={user.id}>
@@ -37,6 +38,9 @@ class DisplayInfor extends React.Component {
                   </h1>
                   <br />
                   <h2>Tuoi : {user.age}</h2>
+                  <button onClick={() => this.props.handleDeleteUser(user.id)}>
+                    X
+                  </button>
                 </div>
               );
 
@@ -68,7 +72,7 @@ class DisplayInfor extends React.Component {
               // }
             })}
             :
-          </div>
+          </>
         )}
       </div>
     );

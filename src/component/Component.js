@@ -10,14 +10,28 @@ class Component extends React.Component {
       { id: 3, name: "Tran Van Z", age: 40 },
     ],
   };
-
+  handleNewUser = (userObj) => {
+    this.setState({
+      listUser: [userObj, ...this.state.listUser],
+    });
+  };
+  handleDeleteUser = (idUser) => {
+    let listUserClone = this.state.listUser;
+    listUserClone = listUserClone.filter((item) => item.id !== idUser);
+    this.setState({
+      listUser: listUserClone,
+    });
+  };
   //JSX
   render() {
     return (
-      <div>
-        <DisplayInfor listUser={this.state.listUser} />
-        <UserInfor />
-      </div>
+      <>
+        <DisplayInfor
+          listUser={this.state.listUser}
+          handleDeleteUser={this.handleDeleteUser}
+        />
+        <UserInfor handleNewUser={this.handleNewUser} />
+      </>
     );
   }
 }
